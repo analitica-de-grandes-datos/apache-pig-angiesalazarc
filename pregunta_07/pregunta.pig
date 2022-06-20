@@ -20,7 +20,7 @@ column = FOREACH lineas GENERATE lista;
 
 extraer = FOREACH column GENERATE COUNT(KEYSET($0));
 
-cuenta = FOREACH lineas GENERATE letra, COUNT(l_minus) AS cuenta, COUNT(lista) AS listas;
+cuenta = FOREACH lineas GENERATE letra, COUNT(l_minus) AS cuenta, COUNT(KEYSET(lista)) AS listas;
 
 orden = ORDER cuenta BY letra, cuenta, listas asc;
 
