@@ -13,10 +13,10 @@ $ pig -x local -f pregunta.pig
 */
 lineas = LOAD 'data.tsv' AS (letra:CHARARRAY, fecha:CHARARRAY, numero:INT);
 
-valores = FOREACH lineas GENERATE numero;
+ordenado = ORDER lineas BY numero;
 
-unicos = DISTINCT valores;
+valores = FOREACH ordenado GENERATE numero;
 
-pequeños = LIMIT unicos 5;
+peque = LIMIT unicos 5;
 
-STORE pequeños INTO 'output' USING PigStorage(',');
+STORE peque INTO 'output' USING PigStorage(',');
