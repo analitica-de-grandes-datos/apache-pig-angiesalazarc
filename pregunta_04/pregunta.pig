@@ -28,7 +28,7 @@ $ pig -x local -f pregunta.pig
 
          >>> Escriba su respuesta a partir de este punto <<<
 */
-lineas = LOAD 'data.csv' AS (driverId:INT, truckId:INT, eventTime:CHARARRAY, eventType:CHARARRAY, longitude:DOUBLE, latitude:DOUBLE, eventKey:CHARARRAY, correlationId:CHARARRAY, driverName:CHARARRAY, routeId:BIGINT, routeName:CHARARRAY, eventDate:CHARARRAY);
+lineas = LOAD 'data.csv' AS (driverId:INT, truckId:INT, eventTime:CHARARRAY, eventType:CHARARRAY, longitude:DOUBLE, latitude:DOUBLE, eventKey:CHARARRAY, correlationId:CHARARRAY, driverName:CHARARRAY, routeId:BIGINTEGER, routeName:CHARARRAY, eventDate:CHARARRAY);
 
 columnas = FOREACH lineas GENERATE driverId, truckId, eventTime;
 
