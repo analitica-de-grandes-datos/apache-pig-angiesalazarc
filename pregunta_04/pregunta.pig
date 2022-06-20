@@ -32,8 +32,8 @@ lineas = LOAD 'data.csv' AS (driverId:INT, truckId:INT, eventTime:CHARARRAY, eve
 
 columnas = FOREACH lineas GENERATE driverId, truckId, eventTime;
 
-con = LIMIT columnas 10;
+ordenado = ORDER columnas BY driverId, truckId, eventTime asc;
 
-ordenado = ORDER con BY driverId, truckId, eventTime asc;
+con = LIMIT ordenado 10;
 
 STORE con INTO 'output' USING PigStorage(',');
