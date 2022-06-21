@@ -19,12 +19,12 @@ evaluación, pig sera eejcutado ejecutado en modo local:
 
 $ pig -x local -f pregunta.pig
 
-        /* >>> Escriba su respuesta a partir de este punto <<< */
+        >>> Escriba su respuesta a partir de este punto <<<
 */
-lines = LOAD 'data.csv' USING PigStorage(',') AS (id:int, name:chararray, name2:chararray, date:chararray, color:chararray, cant:int);
+lineas = LOAD 'data.csv' USING PigStorage(',') AS (id:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
 
-Col5 = FOREACH lines GENERATE color;
+column = FOREACH lineas GENERATE color;
 
-filtered_color = FILTER Col5 BY (color MATCHES '.*[b].*');
+filtro = FILTER column BY ($0 MATCHES '.*b.*');
 
-STORE filtered_color INTO 'output';
+STORE filtro INTO 'output';
