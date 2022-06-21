@@ -35,4 +35,4 @@ lineas = LOAD 'data.csv' AS (id:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha
 
 concatenar = FOREACH lineas GENERATE CONCAT(nombre, '@', apellido);
 
-STORE concatenar INTO 'output' USING PigStorage(',');
+STORE concatenar INTO 'output';
