@@ -38,4 +38,4 @@ column = FOREACH lineas GENERATE apellido, UPPER(apellido), LOWER(apellido);
 
 orden = ORDER column BY apellido asc,
 
-STORE total INTO 'output' USING PigStorage(',');
+STORE orden INTO 'output' USING PigStorage(',');
