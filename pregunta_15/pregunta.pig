@@ -25,4 +25,4 @@ column = FOREACH lineas GENERATE nombre, color;
 
 filtro = FILTER column BY ($0 MATCHES '.*Z.*') AND ($1 MATCHES '.*blue.*');
 
-STORE filtro INTO 'output' USING PigStorage(',');
+STORE filtro INTO 'output' USING PigStorage(' ');

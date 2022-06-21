@@ -21,10 +21,10 @@ $ pig -x local -f pregunta.pig
 
         /* >>> Escriba su respuesta a partir de este punto <<< */
 */
-lineas = LOAD 'data.csv' USING PigStorage(',') AS (id:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
+lines = LOAD 'data.csv' USING PigStorage(',') AS (numero:int, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:int);
 
-select = FOREACH lineas GENERATE color;
+selectcolor = FOREACH lines GENERATE color;
 
-filtro = FILTER select BY ($0 matches '.*b.*');
+bcolor = FILTER selectcolor BY ($0 matches '.*b.*');
 
-STORE filtro INTO 'output';
+STORE bcolor INTO 'output';
