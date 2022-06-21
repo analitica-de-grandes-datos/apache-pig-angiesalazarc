@@ -23,6 +23,6 @@ lineas = LOAD 'data.csv' USING PigStorage(',') AS (id:INT, nombre:CHARARRAY, ape
 
 column = FOREACH lineas GENERATE nombre, color;
 
-filtro = FILTER column BY color IN ('blue','black');
+filtro = FILTER column BY (color MATCHES 'blue') OR (color MATCHES 'black');
 
 STORE filtro INTO 'output' USING PigStorage(',');

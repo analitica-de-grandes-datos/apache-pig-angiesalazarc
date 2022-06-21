@@ -24,6 +24,6 @@ lineas = LOAD 'data.csv' USING PigStorage(',') AS (id:INT, nombre:CHARARRAY, ape
 
 column = FOREACH lineas GENERATE nombre, color;
 
-filtro = FILTER column BY ($0 MATCHES '.*K.*') OR ($1 MATCHES '.*blue.*');
+filtro = FILTER column BY (nombre MATCHES '.*[K].*') OR (color MATCHES 'blue');
 
 STORE filtro INTO 'output' USING PigStorage(',');
