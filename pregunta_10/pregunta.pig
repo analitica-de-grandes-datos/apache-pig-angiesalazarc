@@ -20,4 +20,13 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+lineas = LOAD 'data.csv' AS (id:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
+
+column = FOREACH lineas GENERATE apellido, COUNT(TOKENIZE(REPLACE(apellido, '',' '))) as word;
+
+orden = ORDER column BY word desc, apellido asc;
+
+total = LIMIT orden 5;
+
+STORE total INTO 'output' USING PigStorage(',');
 
