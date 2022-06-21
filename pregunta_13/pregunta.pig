@@ -23,8 +23,8 @@ $ pig -x local -f pregunta.pig
 */
 lineas = LOAD 'data.csv' USING PigStorage(',') AS (id:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
 
-column = FOREACH lineas GENERATE color;
+select = FOREACH lineas GENERATE color;
 
-filtro = FILTER column BY ($0 MATCHES '.*b.*');
+filtro = FILTER select BY ($0 matches '.*b.*');
 
 STORE filtro INTO 'output';
