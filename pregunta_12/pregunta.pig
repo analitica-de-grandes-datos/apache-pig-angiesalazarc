@@ -26,4 +26,10 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+lineas = LOAD 'data.csv' USING PigStorage(',') AS (id:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
 
+column = FOREACH lineas GENERATE apellido;
+
+filtro = FILTER column BY ($0 MATCHES '.*[DEFGHIJK].*');
+
+STORE filtro INTO 'output';
