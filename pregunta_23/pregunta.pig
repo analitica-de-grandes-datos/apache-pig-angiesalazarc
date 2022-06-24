@@ -27,4 +27,6 @@ select = FOREACH lineas GENERATE nombre, FLATTEN(REGEX_EXTRACT_ALL(color, '(.*[a
 
 filtro = FILTER select BY (colorFilt is NOT NULL);
 
+DUMP select;
+
 STORE filtro INTO 'output' USING PigStorage(',');
