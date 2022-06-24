@@ -20,6 +20,6 @@ $ pig -x local -f pregunta.pig
 */
 lineas = LOAD 'data.csv' USING PigStorage(',') AS (numero:int, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:int);
 
-select = FOREACH lineas GENERATE nombre, FLATTEN(REGEX_EXTRACT_ALL(fecha, '([0-9]+)-([0-9]+)-([0-9]+)', 2)) as colorFilt;
+select = FOREACH lineas GENERATE nombre, FLATTEN(REGEX_EXTRACT_ALL(fecha, '([0-9]+)-([0-9]+)-([0-9]+)', 2));
 
 STORE select INTO 'output';
