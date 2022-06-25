@@ -17,8 +17,8 @@ lineas = LOAD 'data.csv' USING PigStorage (',') AS (numero:INT, nombre:CHARARRAY
 
 fec1 = FOREACH lineas GENERATE SUBSTRING(fecha, 0, 4) AS ano;
 
-grouped = GROUP val BY ano;
+grouped = GROUP fec1 BY ano;
 
-cuenta = FOREACH grouped GENERATE group, COUNT (val);
+cuenta = FOREACH grouped GENERATE group, COUNT (fec1);
 
 STORE cuenta INTO 'output' USING PigStorage(',');
