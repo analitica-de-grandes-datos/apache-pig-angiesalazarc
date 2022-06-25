@@ -37,6 +37,6 @@ lineas = LOAD 'data.csv' USING PigStorage (',') AS (numero:INT, nombre:CHARARRAY
 
 fec1 = FOREACH lineas GENERATE fecha, ToString(fecha, 'yyyy-MM-dd') AS fechatotal;
 
-fec2 = FOREACH fec1 GENERATE fechatotal, REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(f4, 'MMM')), 'apr', 'abr' ), 'dec','dic'), 'aug','ago'),'jan','ene') , SUBSTRING (fechatotal, 5, 7), SUBSTRING (fechatotal, 5, 7) AS (mes:int);
+fec2 = FOREACH fec1 GENERATE fechatotal, REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(fecha, 'MMM')), 'apr', 'abr' ), 'dec','dic'), 'aug','ago'),'jan','ene') , SUBSTRING (fechatotal, 5, 7), SUBSTRING (fechatotal, 5, 7) AS (mes:int);
 
 STORE fec2 INTO 'output' USING PigStorage(',');
