@@ -21,4 +21,12 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+lineas = LOAD 'data.csv' USING PigStorage(',') AS (numero:int, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:int);
 
+select = FOREACH lineas GENERATE nombre, FLATTEN(REGEX_EXTRACT_ALL(color, '(.*[aeiou])')) as colorFilt;
+
+filtro = FILTER select BY (colorFilt is NOT NULL);
+
+DUMP select;
+
+STORE filtro INTO 'output' USING PigStorage(',');

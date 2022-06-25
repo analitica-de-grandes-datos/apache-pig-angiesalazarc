@@ -19,4 +19,8 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+lineas = LOAD 'data.csv' USING PigStorage (',') AS (numero:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
 
+select = FOREACH lineas GENERATE SUBSTRING(fecha,5,7);
+
+STORE select INTO 'output';

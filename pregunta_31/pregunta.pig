@@ -13,4 +13,12 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+lineas = LOAD 'data.csv' USING PigStorage (',') AS (numero:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
 
+fec1 = FOREACH lineas GENERATE SUBSTRING(fecha, 0, 4) AS ano;
+
+grouped = GROUP fec1 BY ano;
+
+cuenta = FOREACH grouped GENERATE group, COUNT (fec1);
+
+STORE cuenta INTO 'output' USING PigStorage(',');
