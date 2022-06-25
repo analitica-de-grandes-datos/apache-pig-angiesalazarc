@@ -33,4 +33,8 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+lineas = LOAD 'data.csv' USING PigStorage (',') AS (numero:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
 
+fec1 = FOREACH lineas GENERATE fecha, ToString(f4, 'yyyy-MM-dd') AS fechatotal;
+fec2 = FOREACH fec1 GENERATE fechatotal, SUBSTRING (fechatotal, 8, 10), SUBSTRING (fechatotal, 8, 10) AS (dia:int), REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(fecha, 'EEE')), 'mon', 'lun' ), 'tue','mar'), 'wed','mie'),'thu','jue'),'fri','vie'),'sun','dom'),REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(fecha, 'EEEE')), 'monday', 'lunes' ), 'tuesday','martes'), 'wednesday','miercoles'),'thursday','jueves'),'friday','viernes'),'sunday','domingo');
+STORE fec2 INTO 'output' USING PigStorage(',');
