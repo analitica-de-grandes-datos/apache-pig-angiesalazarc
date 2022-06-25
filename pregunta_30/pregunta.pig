@@ -33,10 +33,8 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
-lineas = LOAD 'data.csv' USING PigStorage (',') AS (numero:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, num:INT);
+lines = LOAD 'data.csv' USING PigStorage(',') AS (f1:int, f2:chararray, f3:chararray, f4:datetime, f5:chararray, f6:int);
 
-fec1 = FOREACH lineas GENERATE fecha, ToString(fecha, 'yyyy-MM-dd') AS fechatotal;
-
-fec2 = FOREACH fec1 GENERATE fechatotal, SUBSTRING (fechatotal, 8, 10), SUBSTRING (fechatotal, 8, 10) AS (dia:int), REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(fecha, 'EEE')), 'mon', 'lun' ), 'tue','mar'), 'wed','mie'),'thu','jue'),'fri','vie'),'sun','dom'),REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(fecha, 'EEEE')), 'monday', 'lunes' ), 'tuesday','martes'), 'wednesday','miercoles'),'thursday','jueves'),'friday','viernes'),'sunday','domingo');
-
-STORE fec2 INTO 'output' USING PigStorage(',');
+A = FOREACH lines GENERATE f4, ToString(f4, 'yyyy-MM-dd') AS fecha;
+B = FOREACH A GENERATE fecha, SUBSTRING (fecha, 8, 10), SUBSTRING (fecha, 8, 10) AS (dia:int), REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(f4, 'EEE')), 'mon', 'lun' ), 'tue','mar'), 'wed','mie'),'thu','jue'),'fri','vie'),'sun','dom'),REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(LOWER (ToString(f4, 'EEEE')), 'monday', 'lunes' ), 'tuesday','martes'), 'wednesday','miercoles'),'thursday','jueves'),'friday','viernes'),'sunday','domingo');
+STORE B INTO 'output' USING PigStorage(',');
